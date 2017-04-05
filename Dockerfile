@@ -1,9 +1,11 @@
 FROM datadog/docker-dd-agent
 
-MAINTAINER Remi Cattiau <remi@cattiau.com>
+MAINTAINER David Maust <david@lykuid.com>
+
+COPY entrypoint.sh /entrypoint.sh
 
 # Install the generic certificates
-RUN apt-get update && apt-get -y install ca-certificates && apt-get clean
+RUN apt-get update && apt-get -y install ca-certificates curl && apt-get clean
 # Add thoses certificates to datadog agent
 RUN echo "ca_certs: /etc/ssl/certs/ca-certificates.crt" >> /etc/dd-agent/datadog.conf
 
